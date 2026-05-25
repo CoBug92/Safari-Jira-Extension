@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" role="img" aria-label="Jira Epic Platform">
+  <defs>
+    <linearGradient id="bg" x1="18" y1="14" x2="110" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6554C0"/>
+      <stop offset="0.52" stop-color="#0052CC"/>
+      <stop offset="1" stop-color="#00A3BF"/>
+    </linearGradient>
+    <linearGradient id="card" x1="32" y1="28" x2="96" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9F2FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <rect x="30" y="28" width="68" height="76" rx="16" fill="url(#card)"/>
+  <rect x="42" y="44" width="26" height="8" rx="4" fill="#172B4D" opacity="0.9"/>
+  <rect x="42" y="61" width="44" height="7" rx="3.5" fill="#0052CC" opacity="0.28"/>
+  <rect x="42" y="76" width="31" height="7" rx="3.5" fill="#0052CC" opacity="0.28"/>
+  <rect x="69" y="66" width="34" height="20" rx="10" fill="#36B37E"/>
+  <circle cx="80" cy="76" r="5" fill="#FFFFFF" opacity="0.95"/>
+  <rect x="88" y="72" width="8" height="8" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <path d="M29 93H54M66 93H99" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.86"/>
+</svg>

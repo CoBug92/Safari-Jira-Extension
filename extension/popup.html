@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jira Epic Platform</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <h1>Issues in epic</h1>
+
+    <section class="section" aria-label="Отображаемые поля">
+      <div class="section-title">Поля</div>
+      <label class="option">
+        <input type="checkbox" name="visibleField" value="platform">
+        <span>Platform</span>
+      </label>
+      <label class="option">
+        <input type="checkbox" name="visibleField" value="storyPoints">
+        <span>Story Points</span>
+      </label>
+    </section>
+
+    <section class="section sort-section" aria-label="Сортировка">
+      <button class="sort-trigger" type="button" aria-haspopup="true">
+        <span>Сортировка</span>
+        <span class="sort-current" data-sort-current>По умолчанию</span>
+      </button>
+      <div class="sort-menu" role="menu">
+        <label class="option" role="menuitemradio">
+          <input type="radio" name="sortMode" value="default">
+          <span>По умолчанию</span>
+        </label>
+        <label class="option" role="menuitemradio">
+          <input type="radio" name="sortMode" value="issueKey">
+          <span>По номеру задачи</span>
+        </label>
+        <label class="option" role="menuitemradio">
+          <input type="radio" name="sortMode" value="platform">
+          <span>По Platform</span>
+        </label>
+        <label class="option" role="menuitemradio">
+          <input type="radio" name="sortMode" value="storyPoints">
+          <span>По Story Points</span>
+        </label>
+      </div>
+    </section>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

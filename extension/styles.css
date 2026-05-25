@@ -1,0 +1,32 @@
+.jira-epic-platform-field:not(.jira-epic-platform-column) {
+  display: inline;
+  margin-left: 8px;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.jira-epic-platform-column {
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+span.jira-epic-platform-column {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.jira-epic-platform-field-loading {
+  opacity: 0.65;
+}
+
+.jira-epic-platform-field-error {
+  color: var(--ds-text-subtlest, #8993a4);
+}

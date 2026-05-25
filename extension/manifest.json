@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Jira Epic Platform",
+  "version": "1.0.0",
+  "description": "Shows the Platform field on Jira Epic issue pages.",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": ["<all_urls>", "activeTab", "tabs", "storage"],
+  "browser_action": {
+    "default_title": "Jira Epic Platform",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.atlassian.net/*",
+        "*://jira.*/*",
+        "*://*/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
