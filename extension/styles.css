@@ -30,3 +30,28 @@ span.jira-epic-platform-column {
 .jira-epic-platform-field-error {
   color: var(--ds-text-subtlest, #8993a4);
 }
+
+.jira-epic-platform-copy-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: var(--ds-text-subtle, #42526e);
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
+
+.jira-epic-platform-copy-link:hover,
+.jira-epic-platform-copy-link:focus-visible {
+  color: var(--ds-text, #172b4d);
+  background: var(--ds-background-neutral, rgba(9, 30, 66, 0.08));
+}

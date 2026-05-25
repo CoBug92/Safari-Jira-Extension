@@ -1,8 +1,9 @@
 (() => {
   const FIELD_CLASS = "jira-epic-platform-field";
   const FIELD_COLUMN_CLASS = "jira-epic-platform-column";
+  const COPY_LINK_BUTTON_CLASS = "jira-epic-platform-copy-link";
   const FIELD_LOADING_CLASS = "jira-epic-platform-field-loading";
-  const INJECTED_FIELD_SELECTOR = `.${FIELD_CLASS}`;
+  const INJECTED_FIELD_SELECTOR = `.${FIELD_CLASS},.${COPY_LINK_BUTTON_CLASS}`;
   const REFRESH_DELAY_MS = 300;
   const SETTINGS_POLL_INTERVAL_MS = 500;
   const ISSUE_KEY_PATTERN = /[A-Z][A-Z0-9]+-\d+/g;
@@ -19,7 +20,11 @@
     { key: "platform", label: "Platform", names: ["Platform"], insertAfter: "issueKey", insertMode: "inline" },
     { key: "storyPoints", label: "Story Points", names: ["Story Points", "Story point estimate", "Story Points Estimate"], insertAfter: "column", insertMode: "column", columnPosition: 5 }
   ];
-  const DEFAULT_VISIBLE_FIELDS = Object.fromEntries(FIELD_DEFINITIONS.map((field) => [field.key, true]));
+  const DISPLAY_OPTION_DEFINITIONS = [
+    ...FIELD_DEFINITIONS,
+    { key: "copyIssueLink" }
+  ];
+  const DEFAULT_VISIBLE_FIELDS = Object.fromEntries(DISPLAY_OPTION_DEFINITIONS.map((field) => [field.key, true]));
   const ORIGINAL_INDEX_DATA_KEY = "jiraEpicPlatformOriginalIndex";
   const extensionApi = typeof browser !== "undefined" ? browser : (typeof chrome !== "undefined" ? chrome : null);
 
@@ -34,7 +39,7 @@
   const normalizeSortMode = (sortMode) => SORT_MODES.has(sortMode) ? sortMode : DEFAULT_SORT_MODE;
   const normalizeVisibleFields = (visibleFields = {}) => ({
     ...DEFAULT_VISIBLE_FIELDS,
-    ...Object.fromEntries(FIELD_DEFINITIONS.map((field) => [field.key, visibleFields[field.key] !== false]))
+    ...Object.fromEntries(DISPLAY_OPTION_DEFINITIONS.map((field) => [field.key, visibleFields[field.key] !== false]))
   });
 
   const getSettingsSignature = (sortMode, visibleFields) => JSON.stringify({
@@ -190,6 +195,8 @@
 
     return normalizeIssueKey(document.title);
   };
+
+  const getSelectedIssueKey = () => normalizeIssueKey(new URLSearchParams(window.location.search).get("selectedIssue"));
 
   const getJiraBaseUrl = () => `${window.location.origin}`;
 
@@ -554,6 +561,185 @@
     }
   };
 
+  const getIssueUrl = (issueKey, link) => {
+    try {
+      const url = new URL(link.href, window.location.href);
+      if (url.pathname.match(new RegExp(`/(browse|issues?)/${issueKey}$`, "i"))) {
+        url.search = "";
+        url.hash = "";
+        return url.toString();
+      }
+    } catch (_) {}
+
+    return new URL(`/browse/${issueKey}`, window.location.origin).toString();
+  };
+
+  const copyText = async (text) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+  };
+
+  const showCopyResult = (button, text) => {
+    const previousText = button.textContent;
+    button.textContent = text;
+    window.setTimeout(() => {
+      if (button.isConnected) {
+        button.textContent = previousText;
+      }
+    }, 1200);
+  };
+
+  const isInRightPreviewArea = (element) => {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    return rect.width > 0 && rect.height > 0 && centerX > window.innerWidth * 0.55;
+  };
+
+  const compareElementsTopRight = (left, right) => {
+    const leftRect = left.getBoundingClientRect();
+    const rightRect = right.getBoundingClientRect();
+    return (leftRect.top - rightRect.top) || (rightRect.left - leftRect.left);
+  };
+
+  const getPreviewIssueKeyCandidates = () => {
+    const selectors = [
+      '[data-testid*="issue.views.issue-base.foundation.breadcrumbs.current-issue.item" i]',
+      '[data-testid*="current-issue" i]',
+      '[data-testid*="issue-key" i]',
+      'a[href*="/browse/"]',
+      'a[href*="/issues/"]',
+      'a[href*="selectedIssue="]',
+      'button',
+      'span'
+    ];
+
+    return Array.from(document.querySelectorAll(selectors.join(",")))
+      .filter((element) => !element.closest(INJECTED_FIELD_SELECTOR))
+      .filter((element) => element.getClientRects().length > 0)
+      .filter(isInRightPreviewArea)
+      .map((element) => ({
+        element,
+        issueKey: normalizeIssueKey(element.textContent) || normalizeIssueKey(element.getAttribute("href"))
+      }))
+      .filter(({ issueKey }) => Boolean(issueKey))
+      .sort((left, right) => compareElementsTopRight(left.element, right.element));
+  };
+
+  const getPreviewIssueKey = () => {
+    const selectedIssueKey = getSelectedIssueKey();
+    if (selectedIssueKey && getPreviewIssueKeyCandidates().some((candidate) => candidate.issueKey === selectedIssueKey)) {
+      return selectedIssueKey;
+    }
+
+    return getPreviewIssueKeyCandidates()[0]?.issueKey || null;
+  };
+
+  const findIssuePreviewContainers = (issueKey) => {
+    const previewSelectors = [
+      '[data-testid*="issue.views.issue-details" i]',
+      '[data-testid*="issue-details" i]',
+      '[data-testid*="issue.layout" i]',
+      '[data-testid*="issue-layout" i]',
+      '[data-testid*="selected-issue" i]',
+      '[role="dialog"]',
+      'aside'
+    ];
+
+    return Array.from(document.querySelectorAll(previewSelectors.join(",")))
+      .filter((element) => element.getClientRects().length > 0)
+      .filter(isInRightPreviewArea)
+      .filter((element) => normalizeIssueKey(element.textContent) === issueKey || getIssueKeysFromText(element.textContent).includes(issueKey))
+      .sort((left, right) => right.getBoundingClientRect().left - left.getBoundingClientRect().left);
+  };
+
+  const findPreviewIssueKeyElement = (issueKey) => {
+    const preferredSelectors = [
+      '[data-testid*="issue.views.issue-base.foundation.breadcrumbs.current-issue.item" i]',
+      '[data-testid*="current-issue" i]',
+      '[data-testid*="issue-key" i]',
+      'a[href*="/browse/"]',
+      'a[href*="/issues/"]',
+      'a[href*="selectedIssue="]',
+      'button',
+      'span'
+    ];
+
+    const containers = findIssuePreviewContainers(issueKey);
+    const roots = containers.length > 0 ? containers : [document];
+    const candidates = roots.flatMap((root) => Array.from(root.querySelectorAll(preferredSelectors.join(","))))
+      .filter((element) => !element.closest(INJECTED_FIELD_SELECTOR))
+      .filter((element) => normalizeIssueKey(element.textContent) === issueKey || normalizeIssueKey(element.getAttribute("href")) === issueKey)
+      .filter((element) => element.getClientRects().length > 0)
+      .filter(isInRightPreviewArea)
+      .sort(compareElementsTopRight);
+
+    return candidates[0] || null;
+  };
+
+  const getOrCreateCopyButton = (anchor, issueKey) => {
+    const existing = document.querySelector(`[data-jira-epic-platform-for="${issueKey}"][data-jira-epic-platform-field="copyIssueLink"]`);
+    if (existing) {
+      anchor.insertAdjacentElement("afterend", existing);
+      return existing;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = COPY_LINK_BUTTON_CLASS;
+    button.dataset.jiraEpicPlatformFor = issueKey;
+    button.dataset.jiraEpicPlatformField = "copyIssueLink";
+    button.setAttribute("aria-label", `Скопировать ссылку на ${issueKey}`);
+    button.title = "Скопировать ссылку";
+    button.textContent = "⧉";
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      try {
+        await copyText(getIssueUrl(issueKey));
+        showCopyResult(button, "✓");
+      } catch (error) {
+        showCopyResult(button, "!");
+        console.warn(`Jira Epic Platform extension failed to copy link for ${issueKey}`, error);
+      }
+    });
+
+    anchor.insertAdjacentElement("afterend", button);
+    return button;
+  };
+
+  const ensurePreviewCopyButton = (issueKey, visibleFields) => {
+    document.querySelectorAll(`.${COPY_LINK_BUTTON_CLASS}`).forEach((button) => {
+      if (button.dataset.jiraEpicPlatformFor !== issueKey) {
+        button.remove();
+      }
+    });
+
+    const existing = document.querySelector(`[data-jira-epic-platform-for="${issueKey}"][data-jira-epic-platform-field="copyIssueLink"]`);
+    if (visibleFields.copyIssueLink) {
+      const anchor = findPreviewIssueKeyElement(issueKey);
+      if (anchor) {
+        getOrCreateCopyButton(anchor, issueKey);
+      } else {
+        existing?.remove();
+      }
+    } else {
+      existing?.remove();
+    }
+  };
+
   const getOrCreateField = (row, insertAfterElement, issueKey, fieldDefinition) => {
     const existing = row.querySelector(`[data-jira-epic-platform-for="${issueKey}"][data-jira-epic-platform-field="${fieldDefinition.key}"]`);
     if (existing) {
@@ -588,6 +774,10 @@
     document.querySelectorAll(INJECTED_FIELD_SELECTOR).forEach((field) => field.remove());
   };
 
+  const removeEpicFields = () => {
+    document.querySelectorAll(`.${FIELD_CLASS}`).forEach((field) => field.remove());
+  };
+
   const removeHiddenFields = (visibleFields) => {
     document.querySelectorAll(INJECTED_FIELD_SELECTOR).forEach((field) => {
       if (visibleFields[field.dataset.jiraEpicPlatformField] !== true) {
@@ -598,7 +788,7 @@
 
   const removeFieldsExcept = (validIssueKeys, visibleFields) => {
     const validKeys = new Set(validIssueKeys);
-    document.querySelectorAll(INJECTED_FIELD_SELECTOR).forEach((field) => {
+    document.querySelectorAll(`.${FIELD_CLASS}`).forEach((field) => {
       if (!validKeys.has(field.dataset.jiraEpicPlatformFor) || visibleFields[field.dataset.jiraEpicPlatformField] !== true) {
         field.remove();
       }
@@ -669,16 +859,23 @@
       return;
     }
 
+    const previewIssueKey = getPreviewIssueKey();
+    if (previewIssueKey) {
+      ensurePreviewCopyButton(previewIssueKey, currentVisibleFields);
+    } else {
+      document.querySelectorAll(`.${COPY_LINK_BUTTON_CLASS}`).forEach((button) => button.remove());
+    }
+
     const currentIssueKey = getCurrentIssueKey();
     if (!currentIssueKey) {
-      removeFields();
+      removeEpicFields();
       lastRefreshSignature = null;
       return;
     }
 
     const containers = findIssuesInEpicContainers(currentIssueKey);
     if (containers.length === 0) {
-      removeFields();
+      removeEpicFields();
       lastRefreshSignature = `${currentIssueKey}:no-issues-in-epic`;
       return;
     }
@@ -688,9 +885,10 @@
       .sort();
     removeFieldsExcept(currentKeys, currentVisibleFields);
 
-    const visibleFieldKeys = FIELD_DEFINITIONS.filter((field) => currentVisibleFields[field.key]).map((field) => field.key);
+    const visibleFieldKeys = DISPLAY_OPTION_DEFINITIONS.filter((field) => currentVisibleFields[field.key]).map((field) => field.key);
+    const visibleEpicFieldKeys = FIELD_DEFINITIONS.filter((field) => currentVisibleFields[field.key]).map((field) => field.key);
     const signature = `${currentIssueKey}:${currentSortMode}:${visibleFieldKeys.join("|")}:${currentKeys.join(",")}`;
-    if (signature === lastRefreshSignature && currentKeys.every((key) => visibleFieldKeys.every((fieldKey) => document.querySelector(`.${FIELD_CLASS}[data-jira-epic-platform-for="${key}"][data-jira-epic-platform-field="${fieldKey}"]`)))) {
+    if (signature === lastRefreshSignature && currentKeys.every((key) => visibleEpicFieldKeys.every((fieldKey) => document.querySelector(`[data-jira-epic-platform-for="${key}"][data-jira-epic-platform-field="${fieldKey}"]`)))) {
       return;
     }
 
@@ -702,7 +900,7 @@
       const currentIssue = await fetchIssue(currentIssueKey, routeAbortController.signal);
       const issueType = currentIssue.fields?.issuetype?.name;
       if (String(issueType).toLowerCase() !== "epic") {
-        removeFields();
+        removeEpicFields();
         return;
       }
 
@@ -736,7 +934,7 @@
       const target = mutation.target instanceof Element ? mutation.target : mutation.target.parentElement;
       const addedNodes = Array.from(mutation.addedNodes).filter((node) => node.nodeType === Node.ELEMENT_NODE);
       const removedNodes = Array.from(mutation.removedNodes).filter((node) => node.nodeType === Node.ELEMENT_NODE);
-      const touchedOwnField = target?.closest?.(`.${FIELD_CLASS}`) || [...addedNodes, ...removedNodes].every((node) => node.classList?.contains(FIELD_CLASS));
+      const touchedOwnField = target?.closest?.(INJECTED_FIELD_SELECTOR) || [...addedNodes, ...removedNodes].every((node) => node.matches?.(INJECTED_FIELD_SELECTOR));
       return touchedOwnField;
     });
 

@@ -4,7 +4,8 @@
   const DEFAULT_SORT_MODE = "default";
   const DEFAULT_VISIBLE_FIELDS = {
     platform: true,
-    storyPoints: true
+    storyPoints: true,
+    copyIssueLink: true
   };
   const SORT_LABELS = {
     default: "По умолчанию",

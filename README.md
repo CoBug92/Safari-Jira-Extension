@@ -66,21 +66,6 @@ xcrun safari-web-extension-converter extension --project-location . --app-name "
 
 После генерации проверь bundle identifier и signing в Xcode.
 
-## Обновление расширения после правок
-
-Если менялись файлы в папке `extension`, нужно синхронизировать их в Xcode resources:
-
-```sh
-cp extension/content.js "Jira Epic Platform/Jira Epic Platform Extension/Resources/content.js"
-cp extension/styles.css "Jira Epic Platform/Jira Epic Platform Extension/Resources/styles.css"
-cp extension/manifest.json "Jira Epic Platform/Jira Epic Platform Extension/Resources/manifest.json"
-cp extension/popup.html "Jira Epic Platform/Jira Epic Platform Extension/Resources/popup.html"
-cp extension/popup.css "Jira Epic Platform/Jira Epic Platform Extension/Resources/popup.css"
-cp extension/popup.js "Jira Epic Platform/Jira Epic Platform Extension/Resources/popup.js"
-```
-
-Затем снова запусти приложение из Xcode и обнови страницу Jira в Safari.
-
 ## Важные замечания
 
 - Пользователь должен быть залогинен в Jira в Safari.
