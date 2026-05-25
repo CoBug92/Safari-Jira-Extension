@@ -61,7 +61,7 @@ xcodebuild -project "Jira Epic Platform/Jira Epic Platform.xcodeproj" -scheme "J
 Если нужно заново сгенерировать Xcode-проект из папки `extension`, выполни из корня репозитория:
 
 ```sh
-xcrun safari-web-extension-converter extension --project-location . --app-name "Jira Epic Platform" --bundle-identifier "com.example.jira-epic-platform" --swift --macos-only --copy-resources --no-open --no-prompt --force
+xcrun safari-web-extension-converter extension --project-location . --app-name "Jira Epic Platform" --bundle-identifier "ru.kostyuchenko.safari-jira-extension" --swift --macos-only --copy-resources --no-open --no-prompt --force
 ```
 
 После генерации проверь bundle identifier и signing в Xcode.

@@ -1,7 +1,7 @@
 import Cocoa
 import SafariServices
 
-let extensionBundleIdentifier = "com.example.jira-epic-platform.Extension"
+let extensionBundleIdentifier = "ru.kostyuchenko.safari-jira-extension.Extension"
 
 class ViewController: NSViewController {
     private let iconImageView = NSImageView()
