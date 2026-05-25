@@ -13,7 +13,7 @@ Content script запускается на страницах Jira, опреде
 - `По Platform` — сортировка по значению поля `Platform`, затем по issue key.
 - `По Story Points` — сортировка по значению поля `Story Points`, затем по issue key.
 
-В этом же popup можно включать и выключать отображение полей `Platform` и `Story Points`.
+В этом же popup можно включать и выключать отображение полей `Platform`, `Story Points` и кнопки копирования ссылки на задачу в preview-панели Jira.
 
 Для загрузки данных используется текущая Safari-сессия пользователя:
 
@@ -25,8 +25,8 @@ Content script запускается на страницах Jira, опреде
 ## Структура проекта
 
 - `extension/manifest.json` — manifest Safari/WebExtension.
-- `extension/content.js` — основная логика: поиск Epic, блока `Issues in epic`, задач и поля `Platform`.
-- `extension/styles.css` — минимальные стили для вставленного значения `Platform`.
+- `extension/content.js` — основная логика: поиск Epic, блока `Issues in epic`, дополнительных полей, сортировки и кнопки копирования ссылки.
+- `extension/styles.css` — минимальные стили для вставленных значений и кнопки копирования.
 - `extension/popup.html` — popup, который открывается по клику на иконку расширения.
 - `extension/popup.js` — сохранение выбранного режима сортировки.
 - `extension/popup.css` — стили popup.
@@ -74,6 +74,15 @@ xcrun safari-web-extension-converter extension --project-location . --app-name "
 - В manifest используется широкий доступ к страницам, чтобы поддерживать Jira Cloud и self-hosted Jira.
 - Если поле называется иначе, измени константу `FIELD_NAME` в `extension/content.js`.
 - Если Safari не подхватил изменения, выключи и снова включи extension в Safari → `Settings...` → `Extensions`.
+
+## Публикация в App Store
+
+Материалы для публичной публикации лежат в папке `docs/app-store`:
+
+- `docs/app-store/listing-ru.md` — черновик описания, keywords и promotional text.
+- `docs/app-store/review-notes.md` — текст для App Review Notes и What to Test.
+- `docs/app-store/privacy-answers.md` — ответы для App Privacy и export compliance.
+- `PRIVACY.md` — privacy policy для публичной страницы проекта.
 
 ## Распространение для команды
 
