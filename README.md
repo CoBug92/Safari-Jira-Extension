@@ -75,15 +75,6 @@ xcrun safari-web-extension-converter extension --project-location . --app-name "
 - Если поле называется иначе, измени константу `FIELD_NAME` в `extension/content.js`.
 - Если Safari не подхватил изменения, выключи и снова включи extension в Safari → `Settings...` → `Extensions`.
 
-## Публикация в App Store
-
-Материалы для публичной публикации лежат в папке `docs/app-store`:
-
-- `docs/app-store/listing-ru.md` — черновик описания, keywords и promotional text.
-- `docs/app-store/review-notes.md` — текст для App Review Notes и What to Test.
-- `docs/app-store/privacy-answers.md` — ответы для App Privacy и export compliance.
-- `PRIVACY.md` — privacy policy для публичной страницы проекта.
-
 ## Распространение для команды
 
 Для команды удобнее не просить всех запускать Xcode. Один разработчик или CI может собрать подписанное macOS-приложение с extension и раздать его как `.dmg`/`.pkg`, либо опубликовать через TestFlight/App Store Connect.
