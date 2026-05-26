@@ -11,7 +11,7 @@
 		A454F7082FC457AD00F753FC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A454F7072FC457AD00F753FC /* Icon.png */; };
 		A454F70E2FC457AD00F753FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454F70D2FC457AD00F753FC /* ViewController.swift */; };
 		A454F7132FC457AF00F753FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A454F7122FC457AF00F753FC /* Assets.xcassets */; };
-		A454F71A2FC457AF00F753FC /* Jira Epic Platform Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A454F7192FC457AF00F753FC /* Jira Epic Platform Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A454F71A2FC457AF00F753FC /* Jira Toolkit Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A454F7192FC457AF00F753FC /* Jira Toolkit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A454F71F2FC457AF00F753FC /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454F71E2FC457AF00F753FC /* SafariWebExtensionHandler.swift */; };
 		A454F72F2FC457AF00F753FC /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A454F72B2FC457AF00F753FC /* styles.css */; };
 		A454F7302FC457AF00F753FC /* icons in Resources */ = {isa = PBXBuildFile; fileRef = A454F72C2FC457AF00F753FC /* icons */; };
@@ -28,7 +28,7 @@
 			containerPortal = A454F6F62FC457AD00F753FC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A454F7182FC457AF00F753FC;
-			remoteInfo = "Jira Epic Platform Extension";
+			remoteInfo = "Jira Toolkit Extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -39,7 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				A454F71A2FC457AF00F753FC /* Jira Epic Platform Extension.appex in Embed Foundation Extensions */,
+				A454F71A2FC457AF00F753FC /* Jira Toolkit Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,7 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A454F6FE2FC457AD00F753FC /* Jira Epic Platform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jira Epic Platform.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A454F6FE2FC457AD00F753FC /* Jira Toolkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jira Toolkit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A454F7012FC457AD00F753FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A454F7052FC457AD00F753FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
 		A454F7072FC457AD00F753FC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		A454F7102FC457AD00F753FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A454F7122FC457AF00F753FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A454F7142FC457AF00F753FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A454F7192FC457AF00F753FC /* Jira Epic Platform Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Jira Epic Platform Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A454F7192FC457AF00F753FC /* Jira Toolkit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Jira Toolkit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A454F71E2FC457AF00F753FC /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		A454F7202FC457AF00F753FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A454F72B2FC457AF00F753FC /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = styles.css; path = Resources/styles.css; sourceTree = "<group>"; };
@@ -90,8 +90,8 @@
 		A454F6F52FC457AD00F753FC = {
 			isa = PBXGroup;
 			children = (
-				A454F7002FC457AD00F753FC /* Jira Epic Platform */,
-				A454F71D2FC457AF00F753FC /* Jira Epic Platform Extension */,
+				A454F7002FC457AD00F753FC /* Jira Toolkit */,
+				A454F71D2FC457AF00F753FC /* Jira Toolkit Extension */,
 				A454F6FF2FC457AD00F753FC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,13 +99,13 @@
 		A454F6FF2FC457AD00F753FC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A454F6FE2FC457AD00F753FC /* Jira Epic Platform.app */,
-				A454F7192FC457AF00F753FC /* Jira Epic Platform Extension.appex */,
+				A454F6FE2FC457AD00F753FC /* Jira Toolkit.app */,
+				A454F7192FC457AF00F753FC /* Jira Toolkit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A454F7002FC457AD00F753FC /* Jira Epic Platform */ = {
+		A454F7002FC457AD00F753FC /* Jira Toolkit */ = {
 			isa = PBXGroup;
 			children = (
 				A454F7012FC457AD00F753FC /* AppDelegate.swift */,
@@ -129,7 +129,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		A454F71D2FC457AF00F753FC /* Jira Epic Platform Extension */ = {
+		A454F71D2FC457AF00F753FC /* Jira Toolkit Extension */ = {
 			isa = PBXGroup;
 			children = (
 				A454F72A2FC457AF00F753FC /* Resources */,
@@ -157,9 +157,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A454F6FD2FC457AD00F753FC /* Jira Epic Platform */ = {
+		A454F6FD2FC457AD00F753FC /* Jira Toolkit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A454F7272FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Epic Platform" */;
+			buildConfigurationList = A454F7272FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Toolkit" */;
 			buildPhases = (
 				A454F6FA2FC457AD00F753FC /* Sources */,
 				A454F6FB2FC457AD00F753FC /* Frameworks */,
@@ -171,16 +171,16 @@
 			dependencies = (
 				A454F71C2FC457AF00F753FC /* PBXTargetDependency */,
 			);
-			name = "Jira Epic Platform";
+			name = "Jira Toolkit";
 			packageProductDependencies = (
 			);
-			productName = "Jira Epic Platform";
-			productReference = A454F6FE2FC457AD00F753FC /* Jira Epic Platform.app */;
+			productName = "Jira Toolkit";
+			productReference = A454F6FE2FC457AD00F753FC /* Jira Toolkit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A454F7182FC457AF00F753FC /* Jira Epic Platform Extension */ = {
+		A454F7182FC457AF00F753FC /* Jira Toolkit Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A454F7232FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Epic Platform Extension" */;
+			buildConfigurationList = A454F7232FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Toolkit Extension" */;
 			buildPhases = (
 				A454F7152FC457AF00F753FC /* Sources */,
 				A454F7162FC457AF00F753FC /* Frameworks */,
@@ -190,11 +190,11 @@
 			);
 			dependencies = (
 			);
-			name = "Jira Epic Platform Extension";
+			name = "Jira Toolkit Extension";
 			packageProductDependencies = (
 			);
-			productName = "Jira Epic Platform Extension";
-			productReference = A454F7192FC457AF00F753FC /* Jira Epic Platform Extension.appex */;
+			productName = "Jira Toolkit Extension";
+			productReference = A454F7192FC457AF00F753FC /* Jira Toolkit Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A454F6F92FC457AD00F753FC /* Build configuration list for PBXProject "Jira Epic Platform" */;
+			buildConfigurationList = A454F6F92FC457AD00F753FC /* Build configuration list for PBXProject "Jira Toolkit" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -229,8 +229,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A454F6FD2FC457AD00F753FC /* Jira Epic Platform */,
-				A454F7182FC457AF00F753FC /* Jira Epic Platform Extension */,
+				A454F6FD2FC457AD00F753FC /* Jira Toolkit */,
+				A454F7182FC457AF00F753FC /* Jira Toolkit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -284,7 +284,7 @@
 /* Begin PBXTargetDependency section */
 		A454F71C2FC457AF00F753FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A454F7182FC457AF00F753FC /* Jira Epic Platform Extension */;
+			target = A454F7182FC457AF00F753FC /* Jira Toolkit Extension */;
 			targetProxy = A454F71B2FC457AF00F753FC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -438,7 +438,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Jira Epic Platform Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Jira Epic Platform Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Jira Toolkit Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -473,7 +473,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Jira Epic Platform Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Jira Epic Platform Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Jira Toolkit Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -512,7 +512,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Jira Epic Platform/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Jira Epic Platform";
+				INFOPLIST_KEY_CFBundleDisplayName = "Jira Toolkit";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -551,7 +551,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Jira Epic Platform/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Jira Epic Platform";
+				INFOPLIST_KEY_CFBundleDisplayName = "Jira Toolkit";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -578,7 +578,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A454F6F92FC457AD00F753FC /* Build configuration list for PBXProject "Jira Epic Platform" */ = {
+		A454F6F92FC457AD00F753FC /* Build configuration list for PBXProject "Jira Toolkit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A454F7212FC457AF00F753FC /* Debug */,
@@ -587,7 +587,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A454F7232FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Epic Platform Extension" */ = {
+		A454F7232FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Toolkit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A454F7242FC457AF00F753FC /* Debug */,
@@ -596,7 +596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A454F7272FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Epic Platform" */ = {
+		A454F7272FC457AF00F753FC /* Build configuration list for PBXNativeTarget "Jira Toolkit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A454F7282FC457AF00F753FC /* Debug */,

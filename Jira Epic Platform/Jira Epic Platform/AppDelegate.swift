@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func showMainWindow() {
         let viewController = ViewController()
         let window = NSWindow(contentViewController: viewController)
-        window.title = "Jira Epic Platform"
+        window.title = "Jira Toolkit"
         window.styleMask = [.titled, .closable]
         window.isRestorable = false
         window.setContentSize(NSSize(width: 425, height: 325))
@@ -40,10 +40,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func makeApplicationMenu() -> NSMenu {
-        let menu = NSMenu(title: "Jira Epic Platform")
-        menu.addItem(NSMenuItem(title: "About Jira Epic Platform", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""))
+        let menu = NSMenu(title: "Jira Toolkit")
+        menu.addItem(NSMenuItem(title: "About Jira Toolkit", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""))
         menu.addItem(.separator())
-        menu.addItem(NSMenuItem(title: "Hide Jira Epic Platform", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h"))
+        menu.addItem(NSMenuItem(title: "Hide Jira Toolkit", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h"))
 
         let hideOthersItem = NSMenuItem(title: "Hide Others", action: #selector(NSApplication.hideOtherApplications(_:)), keyEquivalent: "h")
         hideOthersItem.keyEquivalentModifierMask = [.command, .option]
@@ -51,13 +51,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         menu.addItem(NSMenuItem(title: "Show All", action: #selector(NSApplication.unhideAllApplications(_:)), keyEquivalent: ""))
         menu.addItem(.separator())
-        menu.addItem(NSMenuItem(title: "Quit Jira Epic Platform", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: "Quit Jira Toolkit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         return menu
     }
 
     private func makeHelpMenu() -> NSMenu {
         let menu = NSMenu(title: "Help")
-        let helpItem = NSMenuItem(title: "Jira Epic Platform Help", action: #selector(NSApplication.showHelp(_:)), keyEquivalent: "?")
+        let helpItem = NSMenuItem(title: "Jira Toolkit Help", action: #selector(NSApplication.showHelp(_:)), keyEquivalent: "?")
         menu.addItem(helpItem)
         return menu
     }

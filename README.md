@@ -1,6 +1,6 @@
-# Jira Epic Platform Safari Extension
+# Jira Toolkit
 
-Safari Web Extension для macOS, который показывает значение поля `Platform` у задач в блоке `Issues in epic` на странице Epic в Jira.
+Расширение для macOS, которое показывает значение поля `Platform` у задач в блоке `Issues in epic` на странице Epic в Jira.
 
 ## Как работает расширение
 
@@ -15,7 +15,7 @@ Content script запускается на страницах Jira, опреде
 
 В этом же popup можно включать и выключать отображение полей `Platform`, `Story Points` и кнопки копирования ссылки на задачу в preview-панели Jira.
 
-Для загрузки данных используется текущая Safari-сессия пользователя:
+Для загрузки данных используется текущая сессия пользователя в браузере:
 
 - сначала `/rest/api/3/issue` для Jira Cloud;
 - затем fallback на `/rest/api/2/issue` для Jira Server/Data Center.
@@ -24,13 +24,13 @@ Content script запускается на страницах Jira, опреде
 
 ## Структура проекта
 
-- `extension/manifest.json` — manifest Safari/WebExtension.
+- `extension/manifest.json` — manifest WebExtension.
 - `extension/content.js` — основная логика: поиск Epic, блока `Issues in epic`, дополнительных полей, сортировки и кнопки копирования ссылки.
 - `extension/styles.css` — минимальные стили для вставленных значений и кнопки копирования.
 - `extension/popup.html` — popup, который открывается по клику на иконку расширения.
 - `extension/popup.js` — сохранение выбранного режима сортировки.
 - `extension/popup.css` — стили popup.
-- `Jira Epic Platform/Jira Epic Platform.xcodeproj` — сгенерированный Xcode-проект macOS Safari Extension.
+- `Jira Epic Platform/Jira Epic Platform.xcodeproj` — Xcode-проект macOS-расширения. Внутри приложения отображаемое имя — `Jira Toolkit`.
 
 ## Как запустить локально через Xcode
 
@@ -40,12 +40,12 @@ Content script запускается на страницах Jira, опреде
    open "Jira Epic Platform/Jira Epic Platform.xcodeproj"
    ```
 
-2. В Xcode выбери target `Jira Epic Platform`.
+2. В Xcode выбери target `Jira Toolkit`.
 3. Открой `Signing & Capabilities` и выбери свой `Team`.
-4. Проверь то же самое для target `Jira Epic Platform Extension`.
+4. Проверь то же самое для target `Jira Toolkit Extension`.
 5. Запусти приложение через `Cmd + R`.
-6. Открой Safari → `Settings...` → `Extensions`.
-7. Включи `Jira Epic Platform Extension` и разреши доступ к Jira.
+6. Открой настройки браузера → `Extensions`.
+7. Включи `Jira Toolkit Extension` и разреши доступ к Jira.
 8. Открой Epic-задачу в Jira и проверь блок `Issues in epic`.
 
 ## Проверка сборки без подписи
@@ -53,7 +53,7 @@ Content script запускается на страницах Jira, опреде
 Для локальной проверки компиляции без code signing можно выполнить:
 
 ```sh
-xcodebuild -project "Jira Epic Platform/Jira Epic Platform.xcodeproj" -scheme "Jira Epic Platform" -configuration Debug -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build
+xcodebuild -project "Jira Epic Platform/Jira Epic Platform.xcodeproj" -scheme "Jira Toolkit" -configuration Debug -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build
 ```
 
 ## Как пересоздать Xcode-проект из WebExtension
@@ -61,7 +61,7 @@ xcodebuild -project "Jira Epic Platform/Jira Epic Platform.xcodeproj" -scheme "J
 Если нужно заново сгенерировать Xcode-проект из папки `extension`, выполни из корня репозитория:
 
 ```sh
-xcrun safari-web-extension-converter extension --project-location . --app-name "Jira Epic Platform" --bundle-identifier "ru.kostyuchenko.safari-jira-extension" --swift --macos-only --copy-resources --no-open --no-prompt --force
+xcrun safari-web-extension-converter extension --project-location . --app-name "Jira Toolkit" --bundle-identifier "ru.kostyuchenko.safari-jira-extension" --swift --macos-only --copy-resources --no-open --no-prompt --force
 ```
 
 После генерации проверь bundle identifier и signing в Xcode.
@@ -73,7 +73,7 @@ xcrun safari-web-extension-converter extension --project-location . --app-name "
 - Расширение работает только на страницах Jira и выходит раньше на остальных сайтах.
 - В manifest используется широкий доступ к страницам, чтобы поддерживать Jira Cloud и self-hosted Jira.
 - Если поле называется иначе, измени константу `FIELD_NAME` в `extension/content.js`.
-- Если Safari не подхватил изменения, выключи и снова включи extension в Safari → `Settings...` → `Extensions`.
+- Если браузер не подхватил изменения, выключи и снова включи extension в настройках расширений.
 
 ## Распространение для команды
 
@@ -83,4 +83,4 @@ xcrun safari-web-extension-converter extension --project-location . --app-name "
 
 - для внутреннего тестирования — TestFlight;
 - для корпоративной установки — подписанный и notarized `.pkg`/`.dmg`;
-- для управляемых Mac — установка через MDM и управление Safari extensions политиками.
+- для управляемых Mac — установка через MDM и управление политиками расширений.

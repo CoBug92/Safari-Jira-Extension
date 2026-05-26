@@ -64,9 +64,9 @@ class ViewController: NSViewController {
                 }
 
                 if state?.isEnabled == true {
-                    self.stateLabel.stringValue = "Jira Epic Platform’s extension is currently on. You can turn it off in Safari Settings."
+                    self.stateLabel.stringValue = "Jira Toolkit’s extension is currently on. You can turn it off in Safari Settings."
                 } else {
-                    self.stateLabel.stringValue = "Jira Epic Platform’s extension is currently off. You can turn it on in Safari Settings."
+                    self.stateLabel.stringValue = "Jira Toolkit’s extension is currently off. You can turn it on in Safari Settings."
                 }
             }
         }

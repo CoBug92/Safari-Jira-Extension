@@ -1,15 +1,21 @@
 {
   "manifest_version": 2,
-  "name": "Jira Epic Platform",
+  "name": "Jira Toolkit",
   "version": "1.0.0",
-  "description": "Shows the Platform field on Jira Epic issue pages.",
+  "description": "Adds useful fields, sorting, and copy-link actions to Jira issue views.",
   "icons": {
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
-  "permissions": ["<all_urls>", "activeTab", "tabs", "storage", "clipboardWrite"],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "storage",
+    "clipboardWrite"
+  ],
   "browser_action": {
-    "default_title": "Jira Epic Platform",
+    "default_title": "Jira Toolkit",
     "default_popup": "popup.html",
     "default_icon": {
       "48": "icons/icon-48.png",
@@ -23,8 +29,12 @@
         "*://jira.*/*",
         "*://*/*"
       ],
-      "js": ["content.js"],
-      "css": ["styles.css"],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
       "run_at": "document_idle"
     }
   ]

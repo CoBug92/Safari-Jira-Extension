@@ -712,7 +712,7 @@
         showCopyResult(button, "✓");
       } catch (error) {
         showCopyResult(button, "!");
-        console.warn(`Jira Epic Platform extension failed to copy link for ${issueKey}`, error);
+        console.warn(`Jira Toolkit extension failed to copy link for ${issueKey}`, error);
       }
     });
 
@@ -846,7 +846,7 @@
             insertAfterByTarget.set(fieldDefinition.insertAfter, field);
           }
         }
-        console.warn(`Jira Epic Platform extension failed to load fields for ${issueKey}`, error);
+        console.warn(`Jira Toolkit extension failed to load fields for ${issueKey}`, error);
       }
     }
 
@@ -907,7 +907,7 @@
       await enhanceIssueRows(containers, currentIssueKey, routeAbortController.signal, currentSortMode, currentVisibleFields);
     } catch (error) {
       if (error.name !== "AbortError") {
-        console.warn("Jira Epic Platform extension failed to enhance Issues in epic", error);
+        console.warn("Jira Toolkit extension failed to enhance Issues in epic", error);
       }
     }
   }

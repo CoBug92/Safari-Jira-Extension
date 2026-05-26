@@ -1,6 +1,6 @@
 //
 //  SafariWebExtensionHandler.swift
-//  Jira Epic Platform Extension
+//  Jira Toolkit Extension
 //
 //  Created by Bogdan Kostyuchenko on 25.05.2026.
 //
